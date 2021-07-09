@@ -96,4 +96,9 @@ public class SetmealServiceImpl implements SetmealService {
         setmealDao.deleteCheckGroupIdBySetmealId(id);
         setmealDao.deleteById(id);
     }
+
+    @Override
+    public List<String> findImgs() {
+        return setmealDao.findImgs();
+    }
 }
