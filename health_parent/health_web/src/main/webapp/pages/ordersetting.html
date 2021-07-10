@@ -142,10 +142,22 @@
         },
         created: function () {//在vue初始化时调用
             this.initData(null);
+            this.getDataByMonth();
         },
         methods: {
+            getDataByMonth(){
+                var month = this.currentYear + "-" + (this.currentMonth > 9 ? this.currentMonth : ('0' + this.currentMonth));
+                axios.get("/ordersetting/getDataByMonth.do?month=" + month).then(res=>{
+                    if (res.data.flag) {
+                        this.leftobj = res.data.data;
+                    }else{
+                        this.$message.error(res.data.message)
+                    }
+                })
+            },
             //预约设置
             handleOrderSet(day) {
+                alert(this.formatDate(day.getFullYear(), day.getMonth() + 1, day.getDate()))
             },
             //上传之前进行文件格式校验
             beforeUpload(file) {
@@ -240,6 +252,7 @@
             goCurrentMonth: function (year, month) {
                 var d = new Date();
                 this.initData(this.formatDate(d.getFullYear(), d.getMonth() + 1, 1));
+                this.getDataByMonth();
             },
             //向前一个月
             pickPre: function (year, month) {
@@ -249,12 +262,14 @@
                 var d = new Date(this.formatDate(year, month, 1));
                 d.setDate(0);
                 this.initData(this.formatDate(d.getFullYear(), d.getMonth() + 1, 1));
+                this.getDataByMonth();
             },
             //向后一个月
             pickNext: function (year, month) {
                 var d = new Date(this.formatDate(year, month, 1));
                 d.setDate(35);////获取指定天之后的日期
                 this.initData(this.formatDate(d.getFullYear(), d.getMonth() + 1, 1));
+                this.getDataByMonth();
             },
             // 返回 类似 2016-01-02 格式的字符串
             formatDate: function (year, month, day) {

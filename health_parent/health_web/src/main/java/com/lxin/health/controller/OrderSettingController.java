@@ -8,6 +8,7 @@ import com.lxin.health.service.OrderSettingService;
 import com.lxin.health.utils.POIUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -57,5 +59,16 @@ public class OrderSettingController {
         orderSettingService.add(orderSettingList);
 
         return new Result(true, MessageConstant.IMPORT_ORDERSETTING_SUCCESS);
+    }
+
+    /**
+     * 日历展示
+     * @param month
+     * @return
+     */
+    @GetMapping("/getDataByMonth")
+    public Result getDataByMonth(String month){
+        List<Map<String,Integer>> monthData = orderSettingService.getDataByMonth(month);
+        return new Result(true,MessageConstant.QUERY_ORDER_SUCCESS,monthData);
     }
 }

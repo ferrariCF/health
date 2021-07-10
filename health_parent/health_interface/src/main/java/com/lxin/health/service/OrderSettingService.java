@@ -4,6 +4,7 @@ import com.lxin.health.exception.MyException;
 import com.lxin.health.pojo.OrderSetting;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: lee
@@ -15,4 +16,11 @@ public interface OrderSettingService {
      * @param orderSettingList
      */
     void add(List<OrderSetting> orderSettingList) throws MyException;
+
+    /**
+     * 根据月份查询预约信息
+     * @param month
+     * @return
+     */
+    List<Map<String, Integer>> getDataByMonth(String month);
 }

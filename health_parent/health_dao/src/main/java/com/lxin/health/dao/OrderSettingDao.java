@@ -3,6 +3,8 @@ package com.lxin.health.dao;
 import com.lxin.health.pojo.OrderSetting;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author: lee
@@ -27,4 +29,11 @@ public interface OrderSettingDao {
      * @param orderSetting
      */
     void add(OrderSetting orderSetting);
+
+    /**
+     * 根据月份查询预约信息
+     * @param month
+     * @return
+     */
+    List<Map<String, Integer>> getDataByMonth(String month);
 }

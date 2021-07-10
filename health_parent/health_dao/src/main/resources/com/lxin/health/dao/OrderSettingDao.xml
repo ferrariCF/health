@@ -15,4 +15,10 @@
         insert into t_ordersetting(orderDate,number,reservations)
         values(#{orderDate},#{number},#{reservations})
     </insert>
+
+    <select id="getDataByMonth" parameterType="string" resultType="map">
+        select cast(date_format(orderDate,'%d') as signed) date,number,reservations
+        from t_ordersetting
+        where orderDate like #{month}
+    </select>
 </mapper>

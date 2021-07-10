@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: lee
@@ -48,5 +49,11 @@ public class OrderSettingServiceImpl implements OrderSettingService {
             }
         }
         //* 事务控制
+    }
+
+    @Override
+    public List<Map<String, Integer>> getDataByMonth(String month) {
+        month += "%";
+        return orderSettingDao.getDataByMonth(month);
     }
 }
