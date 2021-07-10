@@ -23,4 +23,10 @@ public interface OrderSettingService {
      * @return
      */
     List<Map<String, Integer>> getDataByMonth(String month);
+
+    /**
+     * 基于日历设置可预约人数
+     * @param orderSetting
+     */
+    void editNumberByDate(OrderSetting orderSetting) throws MyException;
 }

@@ -8,10 +8,7 @@ import com.lxin.health.service.OrderSettingService;
 import com.lxin.health.utils.POIUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -70,5 +67,11 @@ public class OrderSettingController {
     public Result getDataByMonth(String month){
         List<Map<String,Integer>> monthData = orderSettingService.getDataByMonth(month);
         return new Result(true,MessageConstant.QUERY_ORDER_SUCCESS,monthData);
+    }
+
+    @PostMapping("/editNumberByDate")
+    public Result editNumberByDate(@RequestBody OrderSetting orderSetting){
+        orderSettingService.editNumberByDate(orderSetting);
+        return new Result(true,MessageConstant.ORDERSETTING_SUCCESS);
     }
 }
