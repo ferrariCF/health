@@ -31,14 +31,16 @@ public class SetmealServiceImpl implements SetmealService {
      */
     @Override
     @Transactional
-    public void add(Setmeal setmeal, Integer[] checkgroupIds) {
+    public Integer add(Setmeal setmeal, Integer[] checkgroupIds) {
         setmealDao.addSetmeal(setmeal);
+        Integer setmealId = setmeal.getId();
 
         if (checkgroupIds != null) {
             for (Integer checkgroupId : checkgroupIds) {
-                setmealDao.addSetmealCheckGroup(setmeal.getId(),checkgroupId);
+                setmealDao.addSetmealCheckGroup(setmealId,checkgroupId);
             }
         }
+        return setmealId;
     }
 
     /**

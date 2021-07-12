@@ -15,7 +15,7 @@ import java.util.List;
  * @date: 2021-07-09
  * 清理七牛上的垃圾文件
  **/
-@Component
+//@Component
 public class CleanImgJob {
 
     public static final Logger log = LoggerFactory.getLogger(CleanImgJob.class);
@@ -23,7 +23,7 @@ public class CleanImgJob {
     @Reference
     private SetmealService setmealService;
 
-    @Scheduled(cron = "0 0 2 * * ? *")//发布后使用
+    //@Scheduled(cron = "0 0 2 * * ? *")//发布后使用
     //@Scheduled(initialDelay = 3000,fixedDelay = 30*60*1000)
     public void cleanImg(){
         List<String> img7Niu = QiNiuUtils.listFile();
