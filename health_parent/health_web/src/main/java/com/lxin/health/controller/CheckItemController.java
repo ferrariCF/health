@@ -8,6 +8,7 @@ import com.lxin.health.entity.Result;
 import com.lxin.health.exception.MyException;
 import com.lxin.health.pojo.CheckItem;
 import com.lxin.health.service.CheckItemService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class CheckItemController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('CHECKITEM_ADD')")
     public Result addCheckItem(@RequestBody CheckItem checkItem) {
         checkItemService.addCheckItem(checkItem);
         return new Result(true, MessageConstant.ADD_CHECKITEM_SUCCESS);
