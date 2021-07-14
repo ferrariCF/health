@@ -37,7 +37,7 @@
                         <el-dropdown class="avatar-container right-menu-item" trigger="click">
                             <div class="avatar-wrapper">
                                 <img src="../img/user2-160x160.jpg" class="user-avatar">
-                                Jay.Liu
+                                {{loginUsername}}
                             </div>
                             <el-dropdown-menu slot="dropdown">
                                 <el-dropdown-item divided>
@@ -79,9 +79,10 @@
 <script src="../plugins/elementui/index.js"></script>
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script>
-    new Vue({
+    var vue = new Vue({
         el: '#app',
         data:{
+            loginUsername:'',
             menuList:[
                 {
                     "path": "1",
@@ -182,6 +183,18 @@
     $(function() {
             var wd = 200;
             $(".el-main").css('width', $('body').width() - wd + 'px');
+            $.get("/user/getLoginUsername.do",res=>{
+                //result
+                if (res.flag) {
+                    vue.loginUsername=res.data;
+                }else{
+                    this.$message({
+                        type:"error",
+                        message:res.data.message,
+                        showClose:true
+                    })
+                }
+            })
     });
 </script>
 </html>
