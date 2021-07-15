@@ -285,6 +285,15 @@ public class DateUtils {
         return calendar.getTime();
     }
 
+    //获得本月最后一天的日期
+    public static Date getLastDayOfThisMonth(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH,1);
+        calendar.add(Calendar.MONTH,1);
+        calendar.add(Calendar.DATE,-1);
+        return calendar.getTime();
+    }
+
     public static void main(String[] args) {
         try {
             System.out.println("本周一" + parseDate2String(getThisWeekMonday()));

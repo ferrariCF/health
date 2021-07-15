@@ -85,4 +85,13 @@
             </collection>
         </collection>
     </resultMap>
+
+    <select id="getSetmealReport" resultType="map">
+        select s.name,t.value
+        from t_setmeal s left join
+        (select setmeal_id,count(1) value
+        from t_order
+        group by setmeal_id) t
+        on s.id=t.setmeal_id
+    </select>
 </mapper>

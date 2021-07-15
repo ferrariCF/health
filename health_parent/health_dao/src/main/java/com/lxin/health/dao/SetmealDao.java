@@ -5,6 +5,7 @@ import com.lxin.health.pojo.Setmeal;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: lee
@@ -88,4 +89,10 @@ public interface SetmealDao {
      * @return
      */
     Setmeal findDetailById(int id);
+
+    /**
+     * 查询套餐占比
+     * @return
+     */
+    List<Map<String, Object>> getSetmealReport();
 }

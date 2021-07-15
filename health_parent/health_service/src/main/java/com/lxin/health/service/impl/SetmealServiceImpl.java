@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: lee
@@ -117,5 +118,14 @@ public class SetmealServiceImpl implements SetmealService {
     @Override
     public Setmeal findDetailById(int id) {
         return setmealDao.findDetailById(id);
+    }
+
+    /**
+     * 查询套餐占比
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> getSetmealReport() {
+        return setmealDao.getSetmealReport();
     }
 }

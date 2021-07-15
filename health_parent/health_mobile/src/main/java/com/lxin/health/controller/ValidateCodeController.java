@@ -35,6 +35,7 @@ public class ValidateCodeController {
     public Result send4Order(String telephone){
         Jedis jedis = jedisPool.getResource();
 
+        //redis存放预约验证码的key
         String key = RedisMessageConstant.SENDTYPE_ORDER + ":" + telephone;
         String codeInRedis = jedis.get(key);
         log.debug("redis中的验证码 {},{}",codeInRedis,telephone);
