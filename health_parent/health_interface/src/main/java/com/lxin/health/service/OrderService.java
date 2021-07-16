@@ -21,5 +21,5 @@ public interface OrderService {
      * @param id
      * @return
      */
-    Map<String, String> findById(int id);
+    Map<String, Object> findById(int id);
 }
