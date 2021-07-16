@@ -13,6 +13,7 @@
     <security:http pattern="/img/**" security="none"/>
     <security:http pattern="/js/**" security="none"/>
     <security:http pattern="/plugins/**" security="none"/>
+    <security:http pattern="/user/loginFail.do" security="none"/>
 
     <!--  拦截规则
       auto-config: true: 自动生成登陆页面，做登陆认证处理，退出处理，
@@ -29,8 +30,8 @@
                 login-processing-url="/login.do"
                 username-parameter="username"
                 password-parameter="password"
-                authentication-failure-url="/login.html"
-                default-target-url="/pages/main.html"
+                authentication-failure-url="/user/loginFail.do"
+                default-target-url="/user/loginSuccess.do"
                 always-use-default-target="true"
         />
 

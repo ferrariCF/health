@@ -22,4 +22,14 @@ public class UserController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new Result(true, MessageConstant.GET_USERNAME_SUCCESS,user.getUsername());
     }
+
+    @RequestMapping("/loginFail")
+    public Result loginFail(){
+        return new Result(false,"用户名或密码错误");
+    }
+
+    @RequestMapping("/loginSuccess")
+    public Result loginSuccess(){
+        return new Result(true,"登录成功");
+    }
 }
