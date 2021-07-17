@@ -7,6 +7,8 @@ import com.lxin.health.service.MemberService;
 import com.lxin.health.service.OrderService;
 import com.lxin.health.service.ReportService;
 import com.lxin.health.service.SetmealService;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -179,5 +182,26 @@ public class ReportController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @GetMapping("/exportPdf")
+    public void exportPdf(HttpServletRequest req,HttpServletResponse res) throws Exception {
+        //获取运营统计数据
+        Map<String, Object> reportData = reportService.getBusinessReportData();
+        //定义模板位置
+        String template = req.getSession().getServletContext().getRealPath("/template");
+        String jrxml = template + File.separator + "health_business3.jrxml";
+        //定义编译后模板位置
+        String jasper = template + File.separator + "health_business3.jasper";
+        //编译模板
+        JasperCompileManager.compileReportToFile(jrxml,jasper);
+        //填充数据
+        List<Map> hotSetmeal = (List<Map>) reportData.get("hotSetmeal");
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasper, reportData, new JRBeanCollectionDataSource(hotSetmeal));
+        //设置响应头和内容体信息
+        res.setContentType("application/pdf");
+        res.setHeader("content-Disposition","attachment;filename=businessReport.pdf");
+        //导出pdf
+        JasperExportManager.exportReportToPdfStream(jasperPrint,res.getOutputStream());
     }
 }
